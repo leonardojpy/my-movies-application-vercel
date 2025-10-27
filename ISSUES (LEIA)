@@ -1,0 +1,12 @@
+A aplicação possui algumas features que não estão funcionando como o esperado. 
+
+Bugs relatados: 
+
+- Após pesquisar, clicar em "Home" não retorna para a página inicial. 
+- Compartilhar a lista de favoritos gera um erro. 
+- Alternar entre as páginas altera o valor total de páginas sem motivo.
+
+QoL: 
+
+- A busca textual não ordena por relevância.
+- Hover nas descrições não tem um comportamento fluido. UX prejudicada.
