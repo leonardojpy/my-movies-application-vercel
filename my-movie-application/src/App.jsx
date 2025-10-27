@@ -1,6 +1,7 @@
 import "./css/App.css";
 import Favorites from "./pages/favorites"; 
-import Home from "./pages/home";          
+import Home from "./pages/home";
+import SharedListPage from "./pages/SharedListPage";
 import { Routes, Route } from "react-router-dom";
 import { MovieProvider } from "./contexts/MovieContext";
 import NavBar from "./components/NavBar";
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/share/:shareId" element={<SharedListPage />} />
         </Routes>
       </main>
     </MovieProvider>
