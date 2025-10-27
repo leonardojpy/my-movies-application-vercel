@@ -3,6 +3,7 @@ Novo repositório para aplicação web utilizando Vite+React.
 Para rodar o projeto localmente:
 
 1 - Navegue até a pasta /my-movie-application
+
 2 - Execute os seguintes comandos no terminal
 
 - npm install
