@@ -36,11 +36,26 @@ export const MovieProvider = ({children}) => {
             return null;
         }
         try {
-            const { shareId } = await saveSharedList(movieIds);
+            const response = await fetch('/api/share-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ movieIds }),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("ERRO DETECTADO NO BACKEND:", response.status, errorText);
+                throw new Error('Falha ao criar o link de compartilhamento.');
+            }
+
+            const { shareId } = await response.json();
             const shareUrl = `${window.location.origin}/share/${shareId}`;
             return shareUrl;
+
         } catch (error) {
-            console.error("Erro ao compartilhar:", error);
+            console.error("Erro ao tentar compartilhar (CATCH):", error);
             return null;
         }
     };
