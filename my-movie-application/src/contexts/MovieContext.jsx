@@ -1,5 +1,5 @@
 import {createContext, useState, useContext, useEffect} from "react"
-import { saveSharedList } from "../services/shareService"; // Ajuste o caminho se necessário
+import { saveSharedList } from "../services/shareService";
 
 const MovieContext = createContext()
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSharedList } from '../services/shareService';
 import { getMovieDetails } from '../services/api';
+import MovieCard from '../components/MovieCard';
 
 const SharedListPage = () => {
   const { shareId } = useParams();
@@ -38,15 +39,11 @@ const SharedListPage = () => {
       <h1>Lista de Favoritos Compartilhada</h1>
       <div className="movies-container">
         {movies.map(movie => (
-          // Use seu componente <MovieCard> aqui se tiver um
-          <div key={movie.id} style={{ width: '200px', margin: '10px', display: 'inline-block' }}>
-            <img 
-               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
-               alt={movie.title} 
-               style={{ width: '100%' }} 
-            />
-            <h3>{movie.title}</h3>
-          </div>
+          <MovieCard 
+            key={movie.id} 
+            movie={movie} 
+            isReadOnly={true} 
+          />
         ))}
       </div>
     </div>

@@ -2,7 +2,8 @@ import { useMovieContext } from "../contexts/MovieContext";
 import { useState, useRef } from "react";
 import "../css/MovieCard.css";
 
-function MovieCard({ movie }) {
+
+function MovieCard({ movie, isReadOnly = false }) {
   const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
   const favorite = isFavorite(movie.id);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -10,6 +11,8 @@ function MovieCard({ movie }) {
 
   function onFavoriteClick(e) {
     e.preventDefault();
+    if (isReadOnly) return;
+
     if (favorite) {
       removeFromFavorites(movie.id);
     } else {
@@ -18,12 +21,14 @@ function MovieCard({ movie }) {
   }
 
   function handleMouseEnter() {
+    if (isReadOnly) return;
     hoverTimeoutRef.current = setTimeout(() => {
       setIsExpanded(true);
     }, 800);
   }
 
   function handleMouseLeave() {
+    if (isReadOnly) return;
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
@@ -32,7 +37,7 @@ function MovieCard({ movie }) {
 
   return (
     <div 
-      className={`movie-card ${isExpanded ? "expanded" : ""}`}
+      className={`movie-card ${isExpanded && !isReadOnly ? "expanded" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -43,10 +48,11 @@ function MovieCard({ movie }) {
         />
         <div className="movie-overlay">
           <button
-            className={`favorite-btn ${favorite ? "active" : ""}`}
+            className={`favorite-btn ${favorite && !isReadOnly ? "active" : ""} ${isReadOnly ? "disabled" : ""}`}
             onClick={onFavoriteClick}
+            disabled={isReadOnly}
           >
-            ♥
+            {isReadOnly ? '★' : '♥'} 
           </button>
         </div>
       </div>
@@ -59,7 +65,7 @@ function MovieCard({ movie }) {
             {movie.vote_average ? movie.vote_average.toFixed(1) : 'Sem nota'}
           </span>
         </div>
-        <p className={isExpanded ? "expanded" : "truncated"}>
+        <p className={isExpanded && !isReadOnly ? "expanded" : "truncated"}>
           {movie.overview || "Sem descrição disponível"}
         </p>
       </div>

@@ -97,12 +97,6 @@ function Home() {
             >
               Próxima
             </button>
-            <button
-              onClick={() => handlePageChange(totalPages)}
-              disabled={currentPage === totalPages}
-            >
-              Última
-            </button>
           </div>
         </>
       )}
